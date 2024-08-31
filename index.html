@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flower Bloom</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background-color: white;
+            overflow: hidden;
+            cursor: crosshair;
+        }
+        .flower {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-size: cover;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        const configDate = new Date('2024-08-01'); // Set your config date here (YYYY-MM-DD format)
+        const currentDate = new Date();
+
+        let flowerImage = 'tulip.gif'; // Default image
+
+        if (currentDate > configDate) {
+            flowerImage = 'sunflower.gif'; // Image to load if the current date is after the config date
+        }
+
+        document.addEventListener('click', function(event) {
+            const flower = document.createElement('div');
+            flower.className = 'flower';
+            flower.style.left = `${event.clientX}px`;
+            flower.style.top = `${event.clientY}px`;
+            flower.style.backgroundImage = `url('${flowerImage}')`;
+
+            document.body.appendChild(flower);
+        });
+    </script>
+</body>
+</html>
