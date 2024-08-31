@@ -24,13 +24,13 @@
 </head>
 <body>
     <script>
-        const configDate = new Date('2024-08-01'); // Set your config date here (YYYY-MM-DD format)
+        const configDate = new Date('2024-08-01'); 
         const currentDate = new Date();
 
-        let flowerImage = 'tulip.gif'; // Default image
+        let flowerImage = 'tulip.gif'; 
 
         if (currentDate > configDate) {
-            flowerImage = 'sunflower.gif'; // Image to load if the current date is after the config date
+            flowerImage = 'sunflower.gif'; 
         }
 
         document.addEventListener('click', function(event) {
