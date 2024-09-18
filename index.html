@@ -61,40 +61,81 @@
         }
 
         .fade-background {
-            animation: fadeToBlack 3s ease forwards;
+            animation: fadeToPinkPurple 5s ease forwards;
         }
 
-        @keyframes fadeToBlack {
+        @keyframes fadeToPinkPurple {
             0% {
                 background: linear-gradient(120deg, #b0c4de, #c5d0e6, #dab4d0, #f1c8d2, #ffd6d6);
             }
             100% {
-                background: linear-gradient(120deg, #2c3e50, #34495e, #4e5d73, #5b6b82, #718092);
+                background: linear-gradient(120deg, #ff69b4, #dda0dd, #fff);
+                background-size: 400% 400%;
+                animation: pinkPurpleCycle 20s ease infinite;
             }
         }
+
+        @keyframes pinkPurpleCycle {
+            0% {
+                background-position: 0% 50%;
+            }
+            25% {
+                background-position: 50% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            75% {
+                background-position: 50% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .moon-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('moon.jpg') no-repeat center center fixed;
+            background-size: contain;
+            opacity: 0;
+            transition: opacity 5s ease;
+        }
+
     </style>
 </head>
 <body>
+    <div id="moonBackground" class="moon-background"></div>
     <script>
-        const configDate = new Date('2024-09-30');
+        const configDate = new Date('2024-10-31');
         const currentDate = new Date();
 
-        let flowerImage = 'tulip.gif'; // Default image (tulip)
+        let flowerImage = 'tulip.gif'; 
+        const moonBackground = document.getElementById('moonBackground');
 
-        if (currentDate > configDate) {
-            flowerImage = 'sun.gif'; // Change to sunflower
-            document.body.classList.add('fade-background'); // Trigger background fade to mysterious tones
+        if (currentDate.getMonth() === 8 && currentDate.getDate() === 29) {
+            document.body.classList.add('fade-background'); 
+            moonBackground.style.opacity = 1; 
+        } else {
+            moonBackground.style.opacity = 0; 
+
+            if (currentDate > configDate) {
+                flowerImage = 'sun.gif'; 
+            }
+
+            document.addEventListener('click', function(event) {
+                const flower = document.createElement('div');
+                flower.className = 'flower';
+                flower.style.left = `${event.clientX}px`;
+                flower.style.top = `${event.clientY}px`;
+                flower.style.backgroundImage = `url('${flowerImage}')`;
+
+                document.body.appendChild(flower);
+            });
         }
-
-        document.addEventListener('click', function(event) {
-            const flower = document.createElement('div');
-            flower.className = 'flower';
-            flower.style.left = `${event.clientX}px`;
-            flower.style.top = `${event.clientY}px`;
-            flower.style.backgroundImage = `url('${flowerImage}')`;
-
-            document.body.appendChild(flower);
-        });
     </script>
 </body>
 </html>
